@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./index.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>font-size</div>
+        <loading :dot-nums="10" :dot-radius="10" :loading-radius="100"></loading>
+    </div>
+    <template id="loading">
+        <div>
+            <p>
+                <h1>vue</h1>
+                <div class="loading">
+                    <div v-for="dot in dotNums" :key="dot" class="loading_dot--position" :style="positionTransform(dot,dotNums)">
+                        <span class="loading_dot--animation" :style="animationTransform(dot,dotNums)"></span>
+                    </div>
+                </div>
+            </p>
+        </div>
+    </template>
+</body>
+
+</html>

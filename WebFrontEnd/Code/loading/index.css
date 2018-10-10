@@ -1,0 +1,50 @@
+html {
+    background: gray;
+}
+
+:root {
+    --loadingRadius:200px;
+    --dotRadius: 10px;
+    --dotColor: gold;
+}
+
+.loading {
+    position: relative;
+    width: var(--loadingRadius);
+    height: var(--loadingRadius);
+    margin-left: 300px;
+    background-color: grey;
+}
+
+.loading_dot--position {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    width: var(--dotRadius);
+    height: var(--dotRadius);
+    border-radius: 50%;
+    color: var(--dotColor);
+    margin-left:calc( - var(--dotRadius) / 2 ); 
+    margin-top:calc( - var(--dotRadius) / 2 ) 
+}
+
+.loading_dot--animation {
+    display: block;
+    width: var(--dotRadius);
+    height: var(--dotRadius);
+    animation: loadingAnimation 1s ease-in-out infinite;
+    background-color: currentColor;
+}
+@keyframes loadingAnimation{
+    0%,100%{
+        opacity: 1;
+        transform: scale(1)
+    };
+    20%{
+        opacity: 1; 
+    }
+    80%{
+        opacity: 0; 
+        transform: scale(0)
+    }
+}
