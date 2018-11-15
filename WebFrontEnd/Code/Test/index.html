@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function flattenArray(arr) {
+            return arr.reduce(function (cur, next, index, arr) {
+                if (next.constructor === Array) {
+                    cur.push.apply(cur, flattenArray(next))
+                } else {
+                    cur.push(next)
+                }
+                return cur
+            }, [])
+        }
+
+        function mergeSort(arr, min, max) {
+            if (min >= max) {
+                //递归终止条件
+                return
+            }
+            let mid=Math.floor((min + max) / 2)
+            mergeSort(arr, min, mid)
+            mergeSort(arr, mid + 1, max)
+            merge(arr, min, max)
+        }
+
+        function merge(arr, min, max) {
+            let temp = []
+            let mid = Math.floor((min + max) / 2)
+            let i = min
+            let j = mid + 1
+            let k = 0
+            let start = 0
+            let end = 0
+            while (i <= mid && j <= max) {
+                if (arr[i] <= arr[j]) {
+                    temp[k] = arr[i]
+                    i++
+                } else {
+                    temp[k] = arr[j]
+                    j++
+                }
+                k++
+            }
+            if (i <= mid) {
+                start = i
+                end = mid
+            } else {
+                start = j
+                end = max
+            }
+            while (start <= end) {
+                temp[k] = arr[start]
+                start++
+                k++
+            }
+            k = 0
+            while (k <= (max - min)) {
+                arr[min + k] = temp[k]
+                if(!arr[min+k]){
+                    console.log(min)
+                }
+                k++
+            }
+        }
+function quickSort(arr,min,max){
+    if(min>=max){
+        return
+    }
+    var p=Math.floor((min+max)/2)
+    partition(arr,min,max,p)
+    quickSort(arr,min,p-1)
+    quickSort(arr,p+1,max)
+}
+function partition(arr,min,max,p){
+    let start=min
+    let end=max
+    while(start<=end){
+        if((arr[start]>arr[p]&&start<p)||(arr[start]<arr[p]&&start>p)){
+            let temp=arr[start]
+            arr[start]=arr[p]
+            arr[p]=temp
+            p=start
+        }
+        start++
+    }
+}
+var arr=[1,5,8,2,7,9,44];
+var val=5
+function deleteItem(arr,val){
+    for(i=0;i<arr.length;i++){
+        if(arr[i]>val){
+            arr.splice(i,1)
+            console.log(arr[i])
+            i--
+        }
+    }
+}
+deleteItem(arr,val)
+
+function showMeMulti(n){
+    if(n<1) 
+    return
+    console.log(showFun(1,n))
+    return showMeMulti(n-1)
+}
+function showFun(n,m){
+    if(n===m)
+    return `${n}*${m},`
+    return `${n}*${m},`+showFun(++n,m)  
+}
+showMeMulti(9)
+    </script>
+</body>
+
+</html>
