@@ -5,6 +5,9 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 
+import "../src/static/js/flexible.js"
+import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+
 Vue.config.productionTip = false;
 
 Vue.use(inject)
