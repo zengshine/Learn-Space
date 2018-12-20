@@ -33,3 +33,28 @@ _.throttle=function(func,wait){
 _.debounce=function(func,wait){
 	return limit(func,wait,true)
 }
+setTimeout(function(){
+	console.log("set timemout first")
+	asyncFir()
+},0)
+setTimeout(function(){
+	console.log("set timemout second")
+},0)
+async function asyncFir(){
+	 console.log("async start");
+	 await asyncSec().then(suc=>{console.log(suc)})
+	 console.log("async end");
+}
+async function asyncSec(params) {
+	console.log("asyncSec")
+	makePromise()
+	return "res:asyncSec"
+}
+function makePromise(){
+	new Promise(resolve=>{
+		resolve(Promise.resolve())
+		console.log("Promise")
+	}).then(()=>{
+		console.log("Promise then")
+	})
+}

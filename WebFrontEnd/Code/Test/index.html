@@ -26,7 +26,7 @@
                 //递归终止条件
                 return
             }
-            let mid=Math.floor((min + max) / 2)
+            let mid = Math.floor((min + max) / 2)
             mergeSort(arr, min, mid)
             mergeSort(arr, mid + 1, max)
             merge(arr, min, max)
@@ -65,59 +65,94 @@
             k = 0
             while (k <= (max - min)) {
                 arr[min + k] = temp[k]
-                if(!arr[min+k]){
+                if (!arr[min + k]) {
                     console.log(min)
                 }
                 k++
             }
         }
-function quickSort(arr,min,max){
-    if(min>=max){
-        return
-    }
-    var p=Math.floor((min+max)/2)
-    partition(arr,min,max,p)
-    quickSort(arr,min,p-1)
-    quickSort(arr,p+1,max)
-}
-function partition(arr,min,max,p){
-    let start=min
-    let end=max
-    while(start<=end){
-        if((arr[start]>arr[p]&&start<p)||(arr[start]<arr[p]&&start>p)){
-            let temp=arr[start]
-            arr[start]=arr[p]
-            arr[p]=temp
-            p=start
-        }
-        start++
-    }
-}
-var arr=[1,5,8,2,7,9,44];
-var val=5
-function deleteItem(arr,val){
-    for(i=0;i<arr.length;i++){
-        if(arr[i]>val){
-            arr.splice(i,1)
-            console.log(arr[i])
-            i--
-        }
-    }
-}
-deleteItem(arr,val)
 
-function showMeMulti(n){
-    if(n<1) 
-    return
-    console.log(showFun(1,n))
-    return showMeMulti(n-1)
-}
-function showFun(n,m){
-    if(n===m)
-    return `${n}*${m},`
-    return `${n}*${m},`+showFun(++n,m)  
-}
-showMeMulti(9)
+        function quickSort(arr, min, max) {
+            if (min >= max) {
+                return
+            }
+            var p = Math.floor((min + max) / 2)
+            partition(arr, min, max, p)
+            quickSort(arr, min, p - 1)
+            quickSort(arr, p + 1, max)
+        }
+
+        function partition(arr, min, max, p) {
+            let start = min
+            let end = max
+            while (start <= end) {
+                if ((arr[start] > arr[p] && start < p) || (arr[start] < arr[p] && start > p)) {
+                    let temp = arr[start]
+                    arr[start] = arr[p]
+                    arr[p] = temp
+                    p = start
+                }
+                start++
+            }
+        }
+        var arr = [1, 5, 8, 2, 7, 9, 44];
+        var val = 5
+
+        function deleteItem(arr, val) {
+            for (i = 0; i < arr.length; i++) {
+                if (arr[i] > val) {
+                    arr.splice(i, 1)
+                    console.log(arr[i])
+                    i--
+                }
+            }
+        }
+        deleteItem(arr, val)
+
+        function showMeMulti(n) {
+            if (n < 1)
+                return
+            console.log(showFun(1, n))
+            return showMeMulti(n - 1)
+        }
+
+        function showFun(n, m) {
+            if (n === m)
+                return `${n}*${m},`
+            return `${n}*${m},` + showFun(++n, m)
+        }
+        showMeMulti(9)
+
+        function partial(func) {
+            let originArg = [].slice.call(arguments, 1)
+            var partFn = function () {
+                let args = [].slice.call(arguments)
+                if (args.length < originArg.length) {
+                    let inPartFn = function () {
+                        return partFn.apply(this, args.concat([].slice.call(arguments)))
+                    }
+                    return inPartFn
+                } else {
+                    let position = args.length
+                    while (position < originArg.length) {
+                        args.push(arguments[position++])
+                    }
+                    return func.apply(this, args)
+                }
+            }
+            return partFn
+        }
+
+        function add() {
+            let result = 0
+            for (let i = 0; i < arguments.length; i++) {
+                result += arguments[i]
+            }
+            debugger
+            console.log(result)
+        }
+        var part = partial(add, 1, 1, 1)
+        part(1)(2)(3)
     </script>
 </body>
 

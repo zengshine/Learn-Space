@@ -17,15 +17,20 @@ import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 })
 export default class Home extends Vue {
   mounted() {
-    this.getData();
   }
   getData() {
     this.$ajax({
       url: "/api/Site?parentid=0&deep=1&userId=admin",
       method: "get",
     }).then(function(data:any){
-      console.log(data)
+      console.log("home:getData,success")
     });
   }
 }
 </script>
+<style>
+.home{
+  height: 1000px;
+}
+</style>
+

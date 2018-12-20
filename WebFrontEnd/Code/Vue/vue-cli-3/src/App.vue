@@ -1,26 +1,67 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <vHeader :height="barHeight"></vHeader>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+      <vHeader v-if="config.isShowHeader" :isHeaderFixed="isHeaderFixed" @showLeftAside="showLeftAside" :height="barHeight"></vHeader>
+      <vLeftAside @hideLeftAside="hideLeftAside" v-if="isShowLeftAside"></vLeftAside>
+      <!-- router-view -->
+      <router-view></router-view>
+      <vFooter v-if="config.isShowFooter" :class="{'fixed':isFooterFixed}"></vFooter>
   </div>
 </template>
 <script lang="ts">
 import { Component,Vue} from "vue-property-decorator";
+ import { State, Action, Getter } from 'vuex-class';
 import vHeader from "@/components/Header.vue"
+import vLeftAside from "@/components/LeftAside.vue"
+import vFooter from "./components/Footer.vue"
+import { ConfigState } from '@/store/types';
+import config from '@/store/modules/config';
+const configModuleNS:string='config'
 @Component({
   components:{
-    vHeader
+    vHeader,
+    vFooter,
+    vLeftAside
   }
 })
 export default class app extends Vue{
+  @State(configModuleNS) config!:ConfigState
+  private isShowLeftAside?:boolean
+  private isFooterFixed?:boolean=true
+  private isHeaderFixed?:boolean=true
   data(){
     return {
-      barHeight:45
+      barHeight:45,
+      isShowLeftAside:false,
     }
+  }
+  mounted() {
+    let vm=this
+    //滚动处理函数
+    function scrollHandler(){
+      let preScrollTop=document.documentElement.scrollTop
+      return function (){
+        let curScrollTop=document.documentElement.scrollTop
+        let distance=curScrollTop-preScrollTop
+        if(distance<0){
+          vm.isFooterFixed=true
+          vm.isHeaderFixed=true
+        }else{
+          vm.isFooterFixed=false
+          vm.isHeaderFixed=false
+        }
+        preScrollTop=curScrollTop       
+      }
+    }
+    //注册滚动监听事件
+    document.addEventListener("scroll",window.limit(scrollHandler(),16,true,false)) 
+  }
+  showLeftAside(){
+    let vm=this
+    vm.isShowLeftAside=true
+  }
+  hideLeftAside(){
+    let vm=this
+    vm.isShowLeftAside=false
   }
 }
 </script>
@@ -45,5 +86,5 @@ export default class app extends Vue{
 <style>
 @import url("../src/static/css/reset.css");
 </style>
-<style lang="scss" src="../src/static/scss/variable.scss"></style>
+<style lang="scss" src="../src/static/scss/style.scss"></style>
 
