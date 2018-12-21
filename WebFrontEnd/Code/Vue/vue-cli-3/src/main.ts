@@ -6,7 +6,8 @@ import store from "./store/store";
 import "./registerServiceWorker";
 
 import "../src/utils/flexible/flexible-self-v2.js"
-import "../src/static/js/util.js"
+import "../src/utils/Pollyfill/basic.js"
+import "../src/utils/index.js"
 import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css"
 import "../node_modules/swiper/dist/css/swiper.min.css"
 

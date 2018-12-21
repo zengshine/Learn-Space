@@ -3,7 +3,7 @@
 <article class="foot-bar">
     <nav>
         <ul class="bar-item-ct flex-row">
-            <li v-for="item in barList" :key=item.name class="bar-item  bar-height flex-column flex-center">
+            <li v-for="item in barList" :key=item.name class="bar-item  bar-height flex-column flex-center px">
                 <div>
                     <span><i class="fa" :class="[item.icon]"></i></span>                   
                 </div>

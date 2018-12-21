@@ -4,7 +4,7 @@ import { RouteConfig } from 'vue-router';
 const Home = (r: any) =>
     (require as any).ensure([], () => r(require('../views/Home'), 'Home')); 
 const Swiper = (r: any) =>
-    (require as any).ensure([], () => r(require('../views/Swiper'), 'Swiper')); 
+    (require as any).ensure([], () => r(require('../views/Swiper/Swiper'), 'Swiper')); 
 
 //routes
 const routes = [

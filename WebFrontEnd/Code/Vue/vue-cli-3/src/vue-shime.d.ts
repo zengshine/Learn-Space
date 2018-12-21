@@ -7,4 +7,6 @@ declare module 'swiper'
 
 declare interface Window{
   limit:Function;
+  mozRequestAnimationFrame:Function;
+  msRequestAnimationFrame:Function;
 }
