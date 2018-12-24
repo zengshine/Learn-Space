@@ -41,16 +41,16 @@ class Star {
             ctx.fillRect(this.x, this.y, this.size, this.size);
         }
     }
-    update(ctx) {
+    update(cvs, ctx) {
         this.x -= this.speed;
         if (this.x < 0) {
-            this.reset(ctx);
+            this.reset(cvs);
         } else {
             ctx.fillRect(this.x, this.y, this.size, this.size);
         }
     }
 }
-// 流星
+// 流星-v1
 class ShootingStar {
     position: Crood
     final: Crood
@@ -105,26 +105,108 @@ class ShootingStar {
     }
 }
 
+//流星-v2
+class ShootingStarV2 {
+    x: number;
+    y: number;
+    len: number;
+    speed: number;
+    size: number;
+    waitTime: number;
+    active: boolean;
+    constructor(cas) {
+        this.x = Math.random() * cas.width;
+        this.y = 0;
+        this.len = Math.random() * 80 + 10;
+        this.speed = Math.random() * 15 + 6;
+        this.size = Math.random() * 1 + 0.1;
+        // this is used so the shooting stars arent constant
+        this.waitTime = new Date().getTime() + Math.random() * 3000 + 500;
+        this.active = false;
+    }
+    reset(cas) {
+        this.x = Math.random() * cas.width;
+        this.y = 0;
+        this.len = Math.random() * 50 + 10;
+        this.speed = Math.random() * 10 + 6;
+        this.size = Math.random() * 1 + 0.1;
+        // this is used so the shooting stars arent constant
+        this.waitTime = new Date().getTime() + Math.random() * 3000 + 500;
+        this.active = false;
+    }
+    update(cas, ctx) {
+        if (this.active) {
+            this.x -= this.speed;
+            this.y += this.speed;
+            if (this.x < 0 || this.y >= cas.height) {
+                this.reset(cas);
+            } else {
+                ctx.lineCap = "round";
+                ctx.lineWidth = this.size;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x + this.len, this.y - this.len);
+                ctx.stroke();
+            }
+        } else {
+            if (this.waitTime < new Date().getTime()) {
+                this.active = true;
+            }
+        }
+    }
+}
+
 
 // 流星雨
 export class MeteorShower {
     cvs: HTMLCanvasElement
     ctx: CanvasRenderingContext2D
+    tercvs: HTMLCanvasElement
+    terctx: CanvasRenderingContext2D
     stars: Array<Star>
     shootingStars: Array<ShootingStar>
+    animeObj: Array<any>
+    meteorCount: number
     T: number
     isStop: boolean
     playing: boolean
-    constructor(cvs, ctx) {
+    constructor(cvs, ctx, tercvs, terctx, shootingStarsCount) {
         this.cvs = cvs
         this.ctx = ctx
+        this.tercvs = tercvs
+        this.terctx = terctx
         this.stars = []
         this.shootingStars = []
+        this.animeObj = []
         this.T = 0
         this.isStop = false
         this.playing = false
+        this.meteorCount = shootingStarsCount
     }
+    init() {
+        let vm = this
+        vm.drawBg(vm.tercvs, vm.terctx)
+        vm.createStarV2()
+        vm.animate()
+    }
+    createStarV2() {
+        let vm = this
+        // init the stars
+        for (var i = 0; i < vm.cvs.height; i++) {
+            vm.animeObj.push(
+                new Star({
+                    x: Math.random() * vm.cvs.width,
+                    y: Math.random() * vm.cvs.height
+                })
+            );
+        }
 
+        // Add shooting stars that just cycle.
+        for (var i = 0; i < vm.meteorCount; i++) {
+            vm.animeObj.push(new ShootingStarV2(vm.cvs));
+            vm.animeObj.push(new ShootingStarV2(vm.cvs));
+        }
+    }
     // 生成随机位置的流星
     createStar() {
         let angle = Math.PI / 3;
@@ -141,7 +223,6 @@ export class MeteorShower {
         );
         return star;
     }
-
     remove(star) {
         this.shootingStars = this.shootingStars.filter((s) => {
             return s !== star
@@ -189,18 +270,32 @@ export class MeteorShower {
         }
         _tick();
     }
+    animate() {
+        let vm = this
+        let len = vm.animeObj.length
+        //background
+        vm.ctx.fillStyle = "#05004c";
+        vm.ctx.fillRect(0, 0, vm.cvs.width, vm.cvs.height);
+        vm.ctx.fillStyle = "#ffffff";
+        vm.ctx.strokeStyle = "#ffffff";
+        while (len--) {
+            vm.animeObj[len].update(vm.cvs, vm.ctx);
+        }
+        requestAnimationFrame(vm.animate.bind(vm))
+    }
     //绘制背景
     drawBg(terCas, terCtx) {
+        let vm = this
         // Some random points
         let points: number[] = []
-        let displacement = 140
+        let displacement = 130
         let width: number = terCas.width
         let height: number = terCas.height
         let power = Math.pow(2, Math.ceil(Math.log(width) / Math.log(2)));
 
         // set the start height and end height for the terrain
-        points[0] = height - (Math.random() * height) / 2 - displacement;
-        points[power] = height - (Math.random() * height) / 2 - displacement;
+        points[0] = height - (Math.random() * height) / 2.25 - displacement;
+        points[power] = height - (Math.random() * height) / 2.25 - displacement;
 
         // create the rest of the points
         for (var i = 1; i < power; i *= 2) {
@@ -230,7 +325,8 @@ export class MeteorShower {
     }
     // 开始
     start() {
-        this.tick();
+        //this.tick();
+        this.init()
     }
 
     // 暂停
