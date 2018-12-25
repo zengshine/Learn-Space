@@ -5,6 +5,7 @@
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
         <!-- Slides -->
+        <!-- slide-1 -->
         <div class="swiper-slide">
           <canvas id="bgCanvas"></canvas>
           <canvas id="terCanvas"></canvas>
@@ -25,8 +26,13 @@
             <div>数据中心看得见</div>-->
           </div>
         </div>
-        <div class="swiper-slide">Slide 2</div>
-        <div class="swiper-slide">Slide 3</div>
+        <!-- slide 2 -->
+        <div class="swiper-slide">
+          <SnowShower></SnowShower>
+        </div>
+        <div class="swiper-slide">
+          <div id="animeB" class="w-h-full"></div>
+        </div>
       </div>
       <!-- If we need pagination -->
       <div class="swiper-pagination"></div>
@@ -47,9 +53,13 @@ import { promises } from "fs";
 import { resolve } from "url";
 import { setTimeout } from "timers";
 
+import SnowShower from "@/components/display/SnowShower.vue";
 const configModuleNS: string = "config";
+const adata = require("@/static/json/data1.json");
 @Component({
-  components: {}
+  components: {
+    SnowShower
+  }
 })
 export default class Home extends Vue {
   @State(configModuleNS) config!: ConfigState;
@@ -57,6 +67,7 @@ export default class Home extends Vue {
   private pageText: any;
   private isSlideChange: boolean = false;
   private animePromise: any;
+  private animeData: any;
   private data() {
     return {
       pageText: {
@@ -68,8 +79,13 @@ export default class Home extends Vue {
           new pageText("数据中心看得见,", "fadeInDown", false)
         ]
       },
-      animePromise: Promise.resolve()
+      animePromise: Promise.resolve(),
+      animeData: {}
     };
+  }
+  beforeCreate() {
+    let vm = this;
+    console.log(adata);
   }
   created() {
     const vm = this;
@@ -108,10 +124,25 @@ export default class Home extends Vue {
         },
         slideChange: () => {
           vm.resetPrePage();
+          if (vm.mySwiper.realIndex == 2) {
+            vm.$nextTick(() => {
+              vm.bodyMoving();
+            });
+          }
         }
       }
     });
     this.meteorShower();
+  }
+  bodyMoving() {
+    let vm = this;
+    var animation = window.bodymovin.loadAnimation({
+      container: document.getElementById("animeB"),
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: require("@/static/json/data1.json")
+    });
   }
   resetPrePage() {
     let vm = this;
@@ -189,4 +220,7 @@ canvas {
   top: 155px;
 }
 </style>
+<style lang="scss" src="" scoped>
+</style>
+
 

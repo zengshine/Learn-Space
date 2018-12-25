@@ -5,9 +5,10 @@ import router from "./plugins/router";
 import store from "./store/store";
 import "./registerServiceWorker";
 
+import "../src/utils/BodyMoving/index.js"
 import "../src/utils/flexible/flexible-self-v2.js"
 import "../src/utils/Pollyfill/basic.js"
-import "../src/utils/index.js"
+import "../src/utils/index.ts"
 
 import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css"
 import "../node_modules/animate.css/animate.min.css"

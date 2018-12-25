@@ -5,8 +5,10 @@ declare module "*.vue" {
 
 declare module 'swiper'
 
-declare interface Window{
-  limit:Function;
-  mozRequestAnimationFrame:Function;
-  msRequestAnimationFrame:Function;
+declare interface Window {
+  $: Function
+  limit: Function;
+  mozRequestAnimationFrame: Function;
+  msRequestAnimationFrame: Function;
+  bodymovin: any
 }

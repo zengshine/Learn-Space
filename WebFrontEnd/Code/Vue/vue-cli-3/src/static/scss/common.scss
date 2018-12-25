@@ -1,28 +1,43 @@
+.hidden {
+    display: none;
+}
+
+.w-h-full {
+    width: 100%;
+    height: 100%;
+}
+
 div {
     border-width: 1px solid;
 }
-   
+
 .hairlines div {
     border-width: 0.5px;
 }
-.mg-0{
+
+.mg-0 {
     margin: 0;
 }
-.mg-v-10{
+
+.mg-v-10 {
     margin: 10px 0px;
 }
-.fixed{
+
+.fixed {
     position: fixed;
 }
-.flex-row{
+
+.flex-row {
     display: flex;
-    flex-grow:row wrap;
+    flex-grow: row wrap;
 }
-.flex-column{
+
+.flex-column {
     display: flex;
     flex-flow: column nowrap;
 }
-.flex-center{
+
+.flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
