@@ -34,7 +34,19 @@ window.limit = function (fn, wait, isImmediated, isDebounced) {
     }
 }
 //$ selector
-window.$ = function (arg) { return document.querySelector(arg); };
+window.$ = function (arg) { return document.querySelector(arg) };
+
+//url query params
+window.urlQuery = function (key) {
+    var params = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&#]*)/gi,
+        (m, key, value) => {
+            params[key] = value;
+            return ""
+        }
+    );
+    return params[key];
+}
 
 
 

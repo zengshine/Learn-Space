@@ -26,22 +26,27 @@ var minLifetime = 10;
 var maxSize = 3;
 var minSize = 1;
 
-var maxSpeed = 60;
-var minSpeed = 30;
+var maxSpeed = 40;
+var minSpeed = 10;
 
 var maxVarianceX = 50;
 var firefliesNb = 200;
 var firefliesColors = ["255, 255, 255", "170, 255, 230"];
 
 /* CLOUDS, STARDUST, METEOR ---------*/
-//var path = "http://orion9.net/_demos/meteorRain/img/";
-var path = "!file-loader?name=@/static/image/snowShower/";
+var path = "http://orion9.net/_demos/meteorRain/img/";
+var path = "/static/image/snowShower/";
 var clouds: Array<any> = [];
-var cloudsURL = ["cloud1.png", "cloud2.png", "cloud3.png", "cloud4.png"];
+//var cloudsURL = ["cloud1.png", "cloud2.png", "cloud3.png", "cloud4.png"];
+var cloudsURL = [
+    require("@/static/image/snowShower/cloud1.png"),
+    require("@/static/image/snowShower/cloud2.png"),
+    require("@/static/image/snowShower/cloud3.png"),
+    require("@/static/image/snowShower/cloud4.png"),
+];
 
 var stardust;
-var stardustURL = "stardust.png";
-
+var stardustURL = require("@/static/image/snowShower/stardust.png");
 var meteor;
 //===============================
 // FIREFLY CLASS
@@ -380,7 +385,8 @@ class snowShower {
             var cloud = clouds[i];
 
             cloud.index = i;
-            cloud.src = require(path + cloudsURL[i]);
+            // @ts-ignore
+            cloud.src = (cloudsURL[i]);
             cloud.onload = checkLoadedPix;
             cloud.setPosition = function () {
                 this.xpos = Math.round((WIDTH / cloudsURL.length) * this.index - this.width / 4);
@@ -390,7 +396,7 @@ class snowShower {
 
         // Stardust
         stardust = new Image();
-        stardust.src = require(path + stardustURL);
+        stardust.src = (stardustURL);
         stardust.onload = checkLoadedPix;
     }
 }

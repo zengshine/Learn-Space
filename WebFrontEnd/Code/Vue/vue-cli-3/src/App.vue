@@ -39,6 +39,10 @@ export default class app extends Vue {
       isShowLeftAside: false
     };
   }
+  created() {
+    let vm = this;
+    vm.config.UserInfo.userId = window.urlQuery("userId");
+  }
   mounted() {
     let vm = this;
     //滚动处理函数

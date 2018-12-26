@@ -156,7 +156,7 @@ class ShootingStarV2 {
     }
 }
 
-
+let MeteorCount = 4;
 // 流星雨
 export class MeteorShower {
     cvs: HTMLCanvasElement
@@ -170,11 +170,16 @@ export class MeteorShower {
     T: number
     isStop: boolean
     playing: boolean
-    constructor(cvs, ctx, tercvs, terctx, shootingStarsCount) {
-        this.cvs = cvs
-        this.ctx = ctx
-        this.tercvs = tercvs
-        this.terctx = terctx
+    isclearBg: boolean
+    constructor(cvs, tercvs, shootingStarsCount) {
+        this.cvs = document.getElementById(
+            cvs
+        ) as HTMLCanvasElement;
+        this.ctx = this.cvs.getContext("2d")! ,
+            this.tercvs = document.getElementById(
+                tercvs
+            ) as HTMLCanvasElement
+        this.terctx = this.tercvs.getContext("2d")!
         this.stars = []
         this.shootingStars = []
         this.animeObj = []
@@ -182,12 +187,15 @@ export class MeteorShower {
         this.isStop = false
         this.playing = false
         this.meteorCount = shootingStarsCount
+        this.isclearBg = false
+        this.init()
     }
     init() {
-        let vm = this
-        vm.drawBg(vm.tercvs, vm.terctx)
-        vm.createStarV2()
-        vm.animate()
+        let width = window.innerWidth,
+            height = window.innerHeight;
+        height = height < 400 ? 400 : height;
+        this.cvs.width = this.tercvs.width = width;
+        this.cvs.height = this.tercvs.height = height;
     }
     createStarV2() {
         let vm = this
@@ -274,8 +282,9 @@ export class MeteorShower {
         let vm = this
         let len = vm.animeObj.length
         //background
-        vm.ctx.fillStyle = "#05004c";
-        vm.ctx.fillRect(0, 0, vm.cvs.width, vm.cvs.height);
+        //vm.ctx.fillStyle = "rgba(0,0,0,0)";
+        //vm.ctx.fillRect(0, 0, vm.cvs.width, vm.cvs.height);
+        vm.ctx.clearRect(0, 0, vm.cvs.width, vm.cvs.height);
         vm.ctx.fillStyle = "#ffffff";
         vm.ctx.strokeStyle = "#ffffff";
         while (len--) {
@@ -323,10 +332,17 @@ export class MeteorShower {
         terCtx.lineTo(0, points[0]);
         terCtx.fill();
     }
+    clearBg() {
+        this.isclearBg = true
+    }
     // 开始
     start() {
         //this.tick();
-        this.init()
+        if (!this.isclearBg) {
+            this.drawBg(this.tercvs, this.terctx)
+        }
+        this.createStarV2()
+        this.animate()
     }
 
     // 暂停

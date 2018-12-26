@@ -1,5 +1,5 @@
 module.exports = {
-  plugins: { 
+  plugins: {
     "postcss-import": {},
     "postcss-url": {},
     "postcss-aspect-ratio-mini": {},
@@ -8,11 +8,11 @@ module.exports = {
     },
     "postcss-cssnext": {},
     "postcss-px-to-viewport": {
-      viewportWidth: 750, // (Number) The width of the viewport.
-      viewportHeight: 1334, // (Number) The height of the viewport.
+      viewportWidth: 375, // (Number) The width of the viewport.
+      viewportHeight: 667, // (Number) The height of the viewport.
       unitPrecision: 3, // (Number) The decimal numbers to allow the REM units to grow to.
       viewportUnit: 'vw', // (String) Expected units. 
-      selectorBlackList: ['.ignore', '.hairlines',/['-px']$/ig], // (Array) The selectors to ignore and leave as px.
+      selectorBlackList: ['.ignore', '.hairlines', /-px$/], // (Array) The selectors to ignore and leave as px./['-px']$/
       minPixelValue: 1, // (Number) Set the minimum pixel value to replace. 
       mediaQuery: false // (Boolean) Allow px to be converted in media queries.
     },

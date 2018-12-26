@@ -8,7 +8,7 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "esModuleInterop": true,
-    "noImplicitAny":false,
+    "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
@@ -27,7 +27,7 @@
       "scripthost"
     ]
   },
-  "noImplicitAny":false,
+  "noImplicitAny": false,
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",

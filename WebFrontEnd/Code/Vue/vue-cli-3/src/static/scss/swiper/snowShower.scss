@@ -179,12 +179,12 @@ a:hover {
 }
 
 #telescope:after {
-    content: "Meteor shower?";
+    content: " MeteorShower ?";
     position: absolute;
     opacity: .1;
-    font-size: .9em;
+    font-size: .7em;
 
-    @include transform("translate(0px, 10px) rotate(-30deg);");
+    @include transform("translate(0px, 15px) rotate(-30deg);");
     @include transition("opacity .2s ease-out");
 }
 

@@ -6,32 +6,29 @@
       <div class="swiper-wrapper">
         <!-- Slides -->
         <!-- slide-1 -->
-        <div class="swiper-slide">
-          <canvas id="bgCanvas"></canvas>
-          <canvas id="terCanvas"></canvas>
+        <div class="swiper-slide bg1">
+          <MeteorShower></MeteorShower>
           <div class="p1-username">
             <span>张三</span>
           </div>
           <div class="p1-main-tex">
             <transition
-              v-for="(item,index) in pageText.p0"
+              v-for="(item,index) in pageAnime.p0.text"
               :key="index"
-              :enter-active-class="item.cssClass"
+              :enter-active-class="item.animatedClass"
             >
-              <div v-if="item.isVisible">{{item.text}}</div>
+              <div :class="[item.cssClass]" v-if="item.isVisible">{{item.text}}</div>
             </transition>
-            <!-- <div>已经是过去式</div>
-            <div>回首365个日夜</div>
-            <div>你付出的汗水</div>
-            <div>数据中心看得见</div>-->
           </div>
+          <div id="animeEarth" class="w-f anime-ct"></div>
         </div>
         <!-- slide 2 -->
         <div class="swiper-slide">
           <SnowShower></SnowShower>
         </div>
-        <div class="swiper-slide">
-          <div id="animeB" class="w-h-full"></div>
+        <!-- slide 3 -->
+        <div class="swiper-slide bg1">
+          <div id="animeRoute" class="w-f anime-ct"></div>
         </div>
       </div>
       <!-- If we need pagination -->
@@ -47,37 +44,59 @@ import { State, Action, Getter } from "vuex-class";
 import { Component, Vue } from "vue-property-decorator";
 import { ConfigState } from "@/store/types";
 import { pageText } from "@/types";
-
-import { MeteorShower } from "@/utils/MeteorShower";
 import { promises } from "fs";
 import { resolve } from "url";
 import { setTimeout } from "timers";
 
 import SnowShower from "@/components/display/SnowShower.vue";
+import MeteorShower from "@/components/display/MeteorShower.vue";
 const configModuleNS: string = "config";
 const adata = require("@/static/json/data1.json");
+const userId = "001";
 @Component({
   components: {
-    SnowShower
+    SnowShower,
+    MeteorShower
   }
 })
 export default class Home extends Vue {
   @State(configModuleNS) config!: ConfigState;
   private mySwiper: any;
-  private pageText: any;
+  private pageAnime: any;
   private isSlideChange: boolean = false;
   private animePromise: any;
   private animeData: any;
   private data() {
+    let lottieAnime0 = {
+      isInit: false,
+      animeData: [
+        {
+          selector: "#animeEarth",
+          path: "/json/earth.json"
+        }
+      ]
+    };
+    let lottieAnime2 = {
+      isInit: false,
+      animeData: [
+        {
+          selector: "#animeRoute",
+          path: "/json/licheng.json"
+        }
+      ]
+    };
     return {
-      pageText: {
-        p0: [
-          new pageText("2017,", "fadeInDown", false),
-          new pageText("已经是过去式,", "fadeInDown", false),
-          new pageText("回首365个日夜,", "fadeInDown", false),
-          new pageText("你付出的汗水,", "fadeInDown", false),
-          new pageText("数据中心看得见,", "fadeInDown", false)
-        ]
+      pageAnime: {
+        p0: {
+          text: [
+            new pageText("2018年,", "fs-36 lh-50", "fadeInDown", false),
+            new pageText("你踏上了新的征途", "fs-24 lh-33", "fadeInDown", false)
+          ],
+          anime: lottieAnime0
+        },
+        p2: {
+          anime: lottieAnime2
+        }
       },
       animePromise: Promise.resolve(),
       animeData: {}
@@ -85,12 +104,14 @@ export default class Home extends Vue {
   }
   beforeCreate() {
     let vm = this;
-    console.log(adata);
   }
   created() {
     const vm = this;
     vm.config.isShowHeader = false;
     vm.config.isShowFooter = false;
+    vm.$ajax.get(`/api/data?userid=${userId}`).then(res => {
+      console.log(res);
+    });
   }
   mounted() {
     let vm = this;
@@ -101,89 +122,75 @@ export default class Home extends Vue {
   computed() {}
   init() {
     const vm = this;
+    //data init
     //init ct size
     const swiperPage: HTMLElement | null = document.querySelector(
       ".router-swiper"
     );
-    //If you know from external means that an expression is not null or undefined, you can use the non-null assertion operator ! to coerce away those types:
     swiperPage!.style.height = window.innerHeight + "px";
     //init swiper
     vm.mySwiper = new Swiper(".swiper-container", {
       // Optional parameters
       direction: "vertical",
       //loop: true,
-      // If we need pagination
       pagination: {
         el: ".swiper-pagination"
       },
       on: {
         init: () => {
           vm.$nextTick(() => {
-            this.animationExec(vm.pageText.p0);
+            this.animationExec(vm.pageAnime.p0);
           });
         },
         slideChange: () => {
           vm.resetPrePage();
-          if (vm.mySwiper.realIndex == 2) {
-            vm.$nextTick(() => {
-              vm.bodyMoving();
-            });
-          }
         }
       }
     });
-    this.meteorShower();
   }
-  bodyMoving() {
-    let vm = this;
-    var animation = window.bodymovin.loadAnimation({
-      container: document.getElementById("animeB"),
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      animationData: require("@/static/json/data1.json")
-    });
-  }
+  bodyMoving() {}
   resetPrePage() {
     let vm = this;
-    let prePageData: any = vm.pageText[`p${vm.mySwiper.previousIndex}`] || [];
+    let prePageData: any =
+      (vm.pageAnime[`p${vm.mySwiper.previousIndex}`] || {})["text"] || [];
     prePageData.forEach(element => {
       element.isVisible = false;
     });
-    this.animationExec(vm.pageText[`p${vm.mySwiper.realIndex}`] || []);
+    this.animationExec(vm.pageAnime[`p${vm.mySwiper.realIndex}`] || []);
   }
-  animationExec(dataO: Array<pageText>) {
+  animationExec(dataO: object) {
     let vm = this;
     let index = vm.mySwiper.realIndex;
-    let data = vm.pageText[`p${index}`] || [];
-    for (let i = 0; i < data.length; i++) {
+    let pageData = vm.pageAnime[`p${index}`] || {};
+    let anime = pageData["anime"];
+    //lottie animation
+    if (anime && !anime.isInit) {
+      vm.$nextTick(() => {
+        let animeData = anime.animeData[0];
+        let opts = {
+          container: document.querySelector(animeData.selector),
+          renderer: "svg",
+          loop: true,
+          autoplay: true
+          //animationData: require("@/static/json/data1.json")
+        };
+        var animation = window.bodymovin.loadAnimation(
+          Object.assign(opts, animeData)
+        );
+        anime.isInit = true;
+      });
+    }
+    //text animation
+    let textData = pageData["text"] || [];
+    for (let i = 0; i < textData.length; i++) {
       vm.animePromise = vm.animePromise.then(() => {
         return new Promise(resolve => {
           setTimeout(resolve, 700);
         }).then(() => {
-          if (vm.mySwiper.realIndex == index) data[i].isVisible = true;
+          if (vm.mySwiper.realIndex == index) textData[i].isVisible = true;
         });
       });
     }
-  }
-  meteorShower() {
-    let MeteorCount = 4;
-    // Terrain stuff.
-    const terrain: HTMLCanvasElement = document.getElementById(
-      "terCanvas"
-    ) as HTMLCanvasElement;
-    const background: HTMLCanvasElement = document.getElementById(
-      "bgCanvas"
-    ) as HTMLCanvasElement;
-    let terCtx = terrain.getContext("2d")!,
-      bgCtx = background.getContext("2d")!,
-      width = window.innerWidth,
-      height = document.body.offsetHeight;
-    height = height < 400 ? 400 : height;
-    terrain.width = background.width = width;
-    terrain.height = background.height = height;
-    let MSInstance = new MeteorShower(background, bgCtx, terrain, terCtx, 5);
-    MSInstance.start();
   }
 }
 </script>
@@ -191,33 +198,45 @@ export default class Home extends Vue {
 .swiper-container {
   width: 100%;
   height: 100%;
+  font-family: Helvetica;
 }
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
+.bg1 {
+  background-image: url("../../static/image/slidesBg/bg.jpg");
+  background-size: 100%;
 }
 .p1-username {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 50px;
-  width: 75px;
-  height: 75px;
-  background: pink;
+  top: 62px;
+  width: 98px;
+  height: 98px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(45deg, #0a0554, #05004c 35%, #deaab4);
+  /* background-image: linear-gradient(45deg, #8e20e1, #9b26e9 35%, #deaab4); */
+  background-image: linear-gradient(
+    56deg,
+    rgba(202, 33, 232, 0.05) 27%,
+    rgba(255, 255, 255, 0.7) 98%
+  );
   z-index: 1;
-  font-size: 22px;
+  font-size: 24px;
 }
 .p1-main-tex {
   position: absolute;
-  line-height: 34px;
-  left: 30px;
-  top: 155px;
+  left: 39px;
+  top: 172px;
+  z-index: 1;
+}
+.anime-ct {
+  position: absolute;
+  min-height: 300px;
+  bottom: 0;
+  z-index: 1;
+  font-size: 0;
+  transform: translateZ(0);
 }
 </style>
 <style lang="scss" src="" scoped>

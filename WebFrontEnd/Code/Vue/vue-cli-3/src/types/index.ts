@@ -5,10 +5,13 @@ export interface pageText_IF {
 export class pageText {
     text: string
     cssClass: string
+    animatedClass: string
     isVisible: boolean
-    constructor(text, cssClass, isVisible) {
+    lottieAnime: any
+    constructor(text, cssClass, animatedClass, isVisible) {
         this.text = text
-        this.cssClass = "animated " + cssClass
+        this.cssClass = cssClass
+        this.animatedClass = `animated ${animatedClass}`
         this.isVisible = isVisible
     }
 }
