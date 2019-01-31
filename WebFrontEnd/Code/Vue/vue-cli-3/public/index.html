@@ -4,17 +4,83 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="theme-color" content="#3b0fba" />
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  <!-- <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#3b0fba" /> -->
+  <!-- ios -->
+  <!-- <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">-->
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-  <title>vue-cli-3</title>
+  <title>Review2018</title>
 </head>
 
 <body>
+  <style>
+    body,
+    html {
+      padding: 0;
+      margin: 0;
+    }
+
+    .loader {
+      height: 100vh;
+      width: 100%;
+      position: absolute;
+      background-color: #7621ed;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loader h1 {
+      color: white;
+      font-family: 'arial';
+      font-weight: 800;
+      font-size: 24px;
+    }
+
+    .bullets {
+      animation: dots 2s steps(3, end) infinite;
+    }
+
+    @keyframes dots {
+
+      0%,
+      20% {
+        color: rgba(0, 0, 0, 0);
+        text-shadow:
+          .25em 0 0 rgba(0, 0, 0, 0),
+          .5em 0 0 rgba(0, 0, 0, 0);
+      }
+
+      40% {
+        color: white;
+        text-shadow:
+          .25em 0 0 rgba(0, 0, 0, 0),
+          .5em 0 0 rgba(0, 0, 0, 0);
+      }
+
+      60% {
+        text-shadow:
+          .25em 0 0 white,
+          .5em 0 0 rgba(0, 0, 0, 0);
+      }
+
+      80%,
+      100% {
+        text-shadow:
+          .25em 0 0 white,
+          .5em 0 0 white;
+      }
+    }
+  </style>
   <noscript>
     <strong>We're sorry but vue-cli-3 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
   </noscript>
+  <div class="loader">
+    <h1>拼命加载中 <span class="bullets">.</span></h1>
+  </div>
   <div id="app"></div>
   <!-- built files will be auto injected -->
 </body>

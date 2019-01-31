@@ -18,9 +18,9 @@ window.limit = function (fn, wait, isImmediated, isDebounced) {
         }
         timer = setTimeout(execFn, wait)
     }
-    return function () {
+    return function (this: any) {
         //保存函数执行上下文
-        //context = this
+        context = this
         //保存函数执行时参数
         args = [].slice.call(arguments)
         if (!timer) {
@@ -40,9 +40,8 @@ window.$ = function (arg) { return document.querySelector(arg) };
 window.urlQuery = function (key) {
     var params = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&#]*)/gi,
-        (m, key, value) => {
+        (m, key, value): any => {
             params[key] = value;
-            return ""
         }
     );
     return params[key];

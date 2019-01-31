@@ -1,23 +1,17 @@
-import { RouteConfig } from 'vue-router';
-
-//component
-const Home = (r: any) =>
-    (require as any).ensure([], () => r(require('../views/Home'), 'Home')); 
-const Swiper = (r: any) =>
-    (require as any).ensure([], () => r(require('../views/Swiper/Swiper'), 'Swiper')); 
-
 //routes
+import swiper from '@/views/Swiper/Swiper.vue'
 const routes = [
     {
         name: 'index',
         path: "/",
-        component: Home
+        component: swiper
     },
-    {
-        name: 'swiper',
-        path: "/swiper",
-        component: Swiper
-    },
+    // {
+    //     name: 'index',
+    //     path: "/",
+    //     component: () =>
+    //         import('@/views/Swiper/Swiper.vue')
+    // },
 ]
 
 export default routes

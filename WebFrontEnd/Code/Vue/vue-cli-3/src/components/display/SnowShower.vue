@@ -65,8 +65,6 @@ export default class SnowShower extends Vue {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-</style>
-<style lang="scss" src="@/static/scss/swiper/snowShower.scss" scoped>
+<style lang="scss" src="@/static/scss/SnowShower/snowShower.scss" scoped>
 </style>
 

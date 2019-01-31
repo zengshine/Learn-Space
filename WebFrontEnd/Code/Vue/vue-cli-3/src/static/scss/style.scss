@@ -1,6 +1,27 @@
 @import "./common.scss";
 @import "./extend.scss";
 @import "./variable.scss";
-.bar-height{
+
+.bar-height {
     height: 1.25rem;
+}
+
+.animated.d400 {
+    -webkit-animation-duration: 400ms;
+    animation-duration: 400ms;
+}
+
+.animated.d600 {
+    -webkit-animation-duration: 600ms;
+    animation-duration: 600ms;
+}
+
+.animated.d800 {
+    -webkit-animation-duration: 800ms;
+    animation-duration: 800ms;
+}
+
+.animated.d1000 {
+    -webkit-animation-duration: 1000ms;
+    animation-duration: 1000ms;
 }

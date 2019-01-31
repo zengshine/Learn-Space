@@ -1,0 +1,351 @@
+$path: "../../image/snowShower/";
+
+%bottomAbsolute {
+    bottom: 0;
+    position: absolute;
+}
+
+/*=======================*/
+/* MIXINS
+/*=======================*/
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }
+
+    @-ms-keyframes #{$animation-name} {
+        @content;
+    }
+
+    @-o-keyframes #{$animation-name} {
+        @content;
+    }
+
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+@mixin animation($str) {
+    -webkit-animation: #{$str};
+    -moz-animation: #{$str};
+    -ms-animation: #{$str};
+    -o-animation: #{$str};
+    animation: #{$str};
+}
+
+@mixin transform($str) {
+    -webkit-transform: #{$str};
+    -moz-transform: #{$str};
+    -ms-transform: #{$str};
+    -o-transform: #{$str};
+    transform: #{$str};
+}
+
+@mixin transition($str) {
+    -webkit-transition: -webkit-#{$str};
+    -moz-transition: -moz-#{$str};
+    -ms-transition: -ms-#{$str};
+    -o-transition: -o-#{$str};
+    transition: #{$str};
+}
+
+
+/*=======================*/
+/* GENERAL RULES
+/*=======================*/
+html,
+body {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    font-family: "Oswald", sans-serif;
+    color: #FFF;
+    text-transform: uppercase;
+}
+
+body {
+    opacity: 0;
+    @include transition("opacity 1s ease-out");
+}
+
+body.ready {
+    opacity: 1;
+}
+
+a {
+    color: #F46A56;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #64f6E0;
+}
+
+
+/*=======================*/
+/* SVG ELEMENTS
+/*=======================*/
+#foreground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+#foreground>div {
+    @extend %bottomAbsolute;
+    transform-origin: 50% 100%;
+    pointer-events: none;
+}
+
+#grass {
+    width: 105%;
+    height: 200px;
+    left: -2.5%;
+    background: url("#{$path}grass.svg") repeat-x bottom center;
+    background-position: -100px 100%;
+
+    @include animation("skew4 4s .2s ease-in-out infinite");
+}
+
+#tree1 {
+    width: 335px;
+    height: 425px;
+    background: url("#{$path}tree1.svg") no-repeat;
+    left: calc(15% - 335px / 2);
+
+    @include animation("skew1 8s ease-in-out infinite");
+}
+
+.reed {
+    background: url("#{$path}reed.svg") no-repeat;
+    background-size: cover;
+}
+
+#reed1 {
+    left: calc(15% - 335px / 2);
+    width: 180px;
+    height: 155px;
+    @include animation("skew4 4s ease-in-out infinite");
+}
+
+#reed2 {
+    left: calc(15% + 80px / 2);
+    width: 200px;
+    height: 180px;
+
+    @include animation("skew4 4s .4s ease-in-out infinite");
+}
+
+#reed3 {
+    left: calc(15% - 120px / 2);
+    width: 220px;
+    height: 200px;
+
+    @include animation("skew4 4s .8s ease-in-out infinite");
+}
+
+#tree2 {
+    width: 245px;
+    height: 480px;
+    background: url("#{$path}tree2.svg") no-repeat;
+    right: calc(15% - 245px / 2);
+
+    @include animation("skew1 8s 2s ease-in-out infinite");
+}
+
+#bush {
+    right: calc(15% - 120px / 2);
+    width: 210px;
+    height: 135px;
+    background: url("#{$path}bush.svg") no-repeat;
+    background-size: cover;
+
+    @include animation("skew4 4s .6s ease-in-out infinite");
+}
+
+#telescope {
+    width: 130px;
+    height: 150px;
+    background: url("#{$path}telescope.svg") no-repeat;
+    left: calc(50% + 45px);
+    bottom: 55px !important;
+}
+
+#telescope:after {
+    content: " MeteorShower ?";
+    position: absolute;
+    opacity: .1;
+    font-size: .7em;
+
+    @include transform("translate(0px, 15px) rotate(-30deg);");
+    @include transition("opacity .2s ease-out");
+}
+
+#girl:hover+#telescope:after {
+    opacity: .5;
+}
+
+body.meteorShower #telescope:after {
+    opacity: 0 !important;
+}
+
+#girl {
+    width: 108px;
+    height: 136px;
+    background: url("#{$path}girl.svg") no-repeat;
+    left: calc(50% - 108px / 2);
+    bottom: 25px !important;
+
+    cursor: pointer;
+    cursor: alias;
+    pointer-events: auto !important;
+}
+
+body.meteorShower #girl {
+    cursor: inherit;
+    @include animation("observing 10s ease-in-out");
+}
+
+// Pointer-events IE fix
+html.isIE #girl {
+    z-index: 9999;
+}
+
+
+/*=======================*/
+/* OTHER ELEMENTS
+/*=======================*/
+#halo {
+    opacity: 0;
+    @include transition("opacity 1s ease-out");
+}
+
+body.meteorShower #halo {
+    opacity: 1;
+}
+
+#halo>div {
+    position: absolute;
+    width: 100%;
+    height: 450px;
+    background-color: rgba(170, 255, 230, .05);
+    bottom: -275px;
+    border-radius: 50%;
+    box-shadow: 0 0 55px 0 rgba(170, 255, 230, .1);
+
+    @include animation("halo 4s ease-in-out infinite");
+    animation-play-state: paused;
+}
+
+body.meteorShower #halo>div {
+    animation-play-state: running;
+}
+
+#credits {
+    @extend %bottomAbsolute;
+    margin: 1em;
+    opacity: .25;
+    @include transition("opacity .2s ease-out");
+}
+
+#credits:hover {
+    opacity: .75;
+}
+
+#credits a {
+    position: relative;
+    overflow: hidden;
+
+    background: url("#{$path}wave.svg") no-repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 300px 150px;
+    background-position: 0 -45px;
+
+    @include transition("all .5s ease-out");
+}
+
+// background-clip:text fallback for Firefox & IE
+html.isIE #credits a {
+    background: none;
+}
+
+@-moz-document url-prefix() {
+    #credits a {
+        background: none;
+    }
+}
+
+#credits a:hover {
+    background-position: 0 -85px;
+}
+
+
+/*=======================*/
+/* KEYFRAMES
+/*=======================*/
+@include keyframes(skew1) {
+
+    0%,
+    100% {
+        @include transform("skewX(0)");
+    }
+
+    50% {
+        @include transform("skewX(1deg)");
+    }
+}
+
+@include keyframes(skew4) {
+
+    0%,
+    100% {
+        @include transform("skewX(0)");
+    }
+
+    50% {
+        @include transform("skewX(4deg)");
+    }
+}
+
+@include keyframes(observing) {
+
+    0%,
+    80% {
+        @include transform("skewX(0)");
+    }
+
+    10%,
+    15% {
+        @include transform("skewX(-4deg)");
+    }
+
+    25%,
+    50% {
+        @include transform("skewX(-4deg) skewY(4deg)");
+    }
+
+    55%,
+    70% {
+        @include transform("skewX(-4deg)")
+    }
+}
+
+@include keyframes(halo) {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+}
