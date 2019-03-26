@@ -166,7 +166,12 @@ export default class Home extends Vue {
     vm.config.isShowHeader = false;
     vm.config.isShowFooter = false;
     vm.$ajax
-      .get(`/api/data?year=2018&userId=${vm.config.UserInfo.userId}`)
+      .get(`/api/data?year=2018`, {
+        headers: {
+          UserData: vm.config.UserInfo.data,
+          Token: vm.config.UserInfo.token
+        }
+      })
       .then(res => {
         vm.userData = res;
         vm.initTextData();

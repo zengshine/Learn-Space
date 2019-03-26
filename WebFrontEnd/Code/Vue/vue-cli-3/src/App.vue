@@ -44,6 +44,8 @@ export default class app extends Vue {
     vm.config.isShowHeader = false;
     vm.config.isShowFooter = false;
     vm.config.UserInfo.userId = window.urlQuery("userId") || "001";
+     vm.config.UserInfo.data = window.urlQuery("data") || "001";
+         vm.config.UserInfo.token = window.urlQuery("token") || "001";
   }
   mounted() {
     let vm = this;

@@ -1,0 +1,91 @@
+
+.gradient(@angle:top,@start:#000,@stop:#ff050e){
+
+    background: -webkit-linear-gradient(@angle,@start,@stop);
+    background: -moz-linear-gradient(@angle,@start,@stop);
+    background: -o-linear-gradient(@angle,@start,@stop);
+    background: linear-gradient(@angle,@start,@stop);
+  
+  }
+
+//===== prefix =========
+.transition(@pro, @time, @timing){
+    -moz-transition: @pro @time @timing;
+    -o-transition: @pro @time @timing;
+    -webkit-transition: @pro @time @timing;
+    transition: @pro @time @timing;
+};
+.transform(@rule){
+    -moz-transform: @rule;
+    -ms-transform: @rule;
+    -o-transform: @rule;
+    -webkit-transform: @rule;
+    transform: @rule;
+};
+.boxshadow(@arguments){
+    -webkit-box-shadow: @arguments;
+    -moz-box-shadow: @arguments;
+    box-shadow: @arguments;
+}
+.clearfix::after {
+    display: block;
+    content: "";
+    clear: both
+}
+
+
+// flex
+// flex
+.flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+// 垂直布局
+.flex-v {
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+// 子元素占据剩余的空间
+.flex-1 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+// 子元素垂直居中
+.flex-align-center {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+// 子元素水平居中
+.flex-pack-center {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+// 子元素两端对齐
+.flex-pack-justify {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+// 子元素两端对齐
+.flex-around {
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+}
+
+// 子元素水平垂直居中
+.flex-center{
+    .flex;
+    .flex-align-center;
+    .flex-pack-center;
+}

@@ -1,0 +1,660 @@
+/* 按钮 */
+.btn {
+  display: inline-block;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.btn:focus {
+  outline: none;
+}
+.btn.size1 {
+  width: 130px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+}
+.btn.size2 {
+  width: 110px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+}
+.btn.size3 {
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+}
+.btn.size4 {
+  width: 100px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 4px;
+}
+.btn.size5 {
+  width: 120px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 4px;
+}
+.btn.size6 {
+  width: 100px;
+  height: 34px;
+  line-height: 34px;
+  border-radius: 4px;
+}
+.btn.green {
+  background: #1BB797;
+}
+.btn.green:hover {
+  background: #13A688;
+}
+.btn.grey {
+  background: #ddd;
+}
+.btn.grey:hover {
+  background: #ccc;
+}
+.btn.blue {
+  background: #34B0F3;
+}
+.btn.blue:hover {
+  background: #23A2E7;
+}
+.btn.red {
+  color: #fff;
+  background: #FF554F;
+}
+.btn.red:hover {
+  color: #fff;
+  background: #F03A33;
+}
+.btn.empty {
+  border: 1px dashed #ddd;
+  color: #bbb;
+  background: none;
+}
+.btn.empty:hover {
+  border: 1px solid #1BB797;
+  background: #1BB797;
+  color: #fff;
+}
+/** 变量 **/
+.flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.flex-1 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+/** 滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  box-sizing: border-box;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  border-radius: 4px;
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  background: rgba(144, 147, 153, 0.3);
+  border-radius: 4px;
+}
+/* 布局 */
+.list-row .list-col {
+  float: left;
+  box-sizing: border-box;
+}
+.list-row:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+@media (max-width: 640px) {
+  .list-row {
+    margin: -15px;
+  }
+  .list-row .list-col {
+    width: 100%;
+    padding: 15px;
+  }
+}
+@media (min-width: 640px) {
+  .list-row {
+    margin: -20px;
+  }
+  .list-row .list-col {
+    width: 50%;
+    padding: 20px;
+  }
+}
+@media (min-width: 980px) {
+  .list-row {
+    margin: -20px;
+  }
+  .list-row .list-col {
+    width: 33.33333%;
+    padding: 20px;
+  }
+}
+@media (min-width: 1280px) {
+  .list-row {
+    margin: -25px;
+  }
+  .list-row .list-col {
+    width: 25%;
+    padding: 25px;
+  }
+}
+@media (min-width: 1560px) {
+  .list-row {
+    margin: -30px;
+  }
+  .list-row .list-col {
+    width: 25%;
+    padding: 30px;
+  }
+}
+@media (min-width: 1680px) {
+  .list-row {
+    margin: -25px;
+  }
+  .list-row .list-col {
+    width: 20%;
+    padding: 25px;
+  }
+}
+@media (min-width: 1920px) {
+  .list-row {
+    margin: -30px -32px;
+  }
+  .list-row .list-col {
+    width: 20%;
+    padding: 30px 32px;
+  }
+}
+/** 表格 **/
+.com-pagination {
+  text-align: center;
+}
+.com-pagination.is-background .btn-next,
+.com-pagination.is-background .btn-prev,
+.com-pagination.is-background .el-pager li {
+  color: #bbb;
+}
+.com-table th,
+.com-table td {
+  text-align: center;
+}
+.com-table thead {
+  color: #333333;
+}
+.com-table td {
+  border-bottom: 1px dashed #ddd;
+}
+.com-table th.is-leaf {
+  padding: 18px 0;
+  border-bottom: 1px solid #ddd;
+}
+.com-table tr:last-child td {
+  border-bottom: none;
+}
+.com-table:before {
+  display: none;
+}
+/** form 表单 */
+.com-txt,
+.com-textarea {
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  padding: 0 10px;
+  color: #606266;
+  line-height: 40px;
+  outline: none;
+  -moz-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.com-txt:focus,
+.com-textarea:focus {
+  border-color: #1BB797;
+}
+.com-txt:disabled,
+.com-textarea:disabled {
+  background: rgba(221, 221, 221, 0.25);
+  border: 1px solid #ddd;
+}
+.com-txt.err,
+.com-textarea.err {
+  border-color: #FF554F;
+}
+.com-textarea {
+  height: 100px;
+  resize: none;
+  padding: 5px 10px;
+  line-height: 1.5em;
+}
+.com-label {
+  display: inline-block;
+  text-align: right;
+  line-height: 40px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333333;
+  margin-right: 10px;
+}
+.com-value {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  line-height: 40px;
+  margin-left: 10px;
+}
+.com-elsel,
+.com-eldatepicker {
+  width: 100%;
+}
+.com-elsel .el-input__inner,
+.com-eldatepicker .el-input__inner {
+  color: #606266;
+  border-color: #ddd;
+  font-size: 14px;
+}
+.com-elsel .el-input__inner:focus,
+.com-eldatepicker .el-input__inner:focus {
+  border-color: #1BB797;
+}
+.com-elsel.err .el-input__inner,
+.com-eldatepicker.err .el-input__inner {
+  border-color: #FF554F;
+}
+.com-elsel .el-input__inner {
+  padding-left: 10px;
+}
+.com-star {
+  color: #FF554F;
+  margin-right: 4px;
+  font-size: 16px;
+}
+.com-tip {
+  font-size: 12px;
+  font-weight: 400;
+  color: #999;
+  line-height: 18px;
+  margin-top: 6px;
+}
+.formrow {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 64px;
+}
+.formrow + .formrow {
+  margin-top: 16px;
+}
+.formrow .com-txt,
+.formrow .com-elinput,
+.formrow .com-elsel,
+.formrow .com-textarea {
+  max-width: 650px;
+}
+.formrow .tip {
+  font-size: 12px;
+  font-weight: 400;
+  color: #999;
+  line-height: 18px;
+  margin-top: 6px;
+}
+.formrow .txtwp {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  position: relative;
+}
+.formrow .star {
+  color: #FF554F;
+  margin-right: 4px;
+}
+/** placeholder */
+::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #bbb;
+}
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #bbb;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #bbb;
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #bbb;
+}
+.com-elsel .el-input__inner::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #bbb;
+}
+.com-elsel .el-input__inner:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #bbb;
+}
+.com-elsel .el-input__inner::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #bbb;
+}
+.com-elsel .el-input__inner:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #bbb;
+}
+.com-eldatepicker .el-range-input::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #bbb;
+}
+.com-eldatepicker .el-range-input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #bbb;
+}
+.com-eldatepicker .el-range-input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #bbb;
+}
+.com-eldatepicker .el-range-input:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: #bbb;
+}
+.delete-confirm {
+  width: 50%;
+  max-width: 500px;
+  padding-bottom: 40px;
+}
+.delete-confirm .el-message-box__header {
+  border-bottom: 1px solid #ddd;
+  padding: 0 30px;
+  height: 70px;
+  box-sizing: border-box;
+}
+.delete-confirm .el-message-box__title {
+  color: #333333;
+  line-height: 70px;
+}
+.delete-confirm .el-message-box__headerbtn {
+  top: 15px;
+  right: 20px;
+  line-height: 40px;
+}
+.delete-confirm .el-message-box__headerbtn .el-message-box__close {
+  font-size: 24px;
+  color: #bbb;
+}
+.delete-confirm .el-message-box__content {
+  padding: 30px;
+  text-align: center;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.delete-confirm .el-message-box__btns {
+  text-align: center;
+}
+.delete-confirm .el-message-box__status {
+  position: relative;
+  transform: none;
+  display: inline-block;
+  vertical-align: top;
+}
+.delete-confirm .el-message-box__message {
+  padding-left: 12px;
+  display: inline-block;
+}
+.delete-confirm .el-button {
+  display: inline-block;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  width: 110px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+  background: #1BB797;
+  padding: 0;
+}
+.delete-confirm .el-button:focus {
+  outline: none;
+}
+.delete-confirm .el-button.size1 {
+  width: 130px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+}
+.delete-confirm .el-button.size2 {
+  width: 110px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+}
+.delete-confirm .el-button.size3 {
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+}
+.delete-confirm .el-button.size4 {
+  width: 100px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 4px;
+}
+.delete-confirm .el-button.size5 {
+  width: 120px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 4px;
+}
+.delete-confirm .el-button.size6 {
+  width: 100px;
+  height: 34px;
+  line-height: 34px;
+  border-radius: 4px;
+}
+.delete-confirm .el-button.green {
+  background: #1BB797;
+}
+.delete-confirm .el-button.green:hover {
+  background: #13A688;
+}
+.delete-confirm .el-button.grey {
+  background: #ddd;
+}
+.delete-confirm .el-button.grey:hover {
+  background: #ccc;
+}
+.delete-confirm .el-button.blue {
+  background: #34B0F3;
+}
+.delete-confirm .el-button.blue:hover {
+  background: #23A2E7;
+}
+.delete-confirm .el-button.red {
+  color: #fff;
+  background: #FF554F;
+}
+.delete-confirm .el-button.red:hover {
+  color: #fff;
+  background: #F03A33;
+}
+.delete-confirm .el-button.empty {
+  border: 1px dashed #ddd;
+  color: #bbb;
+  background: none;
+}
+.delete-confirm .el-button.empty:hover {
+  border: 1px solid #1BB797;
+  background: #1BB797;
+  color: #fff;
+}
+.delete-confirm .el-button:hover {
+  background: #13A688;
+}
+.delete-confirm .el-message-box__btns button:nth-child(2) {
+  margin-left: -240px;
+}
+.delete-confirm .cancel-btn {
+  display: inline-block;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  width: 110px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+  background: #ddd;
+}
+.delete-confirm .cancel-btn:focus {
+  outline: none;
+}
+.delete-confirm .cancel-btn.size1 {
+  width: 130px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+}
+.delete-confirm .cancel-btn.size2 {
+  width: 110px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+}
+.delete-confirm .cancel-btn.size3 {
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 4px;
+}
+.delete-confirm .cancel-btn.size4 {
+  width: 100px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 4px;
+}
+.delete-confirm .cancel-btn.size5 {
+  width: 120px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 4px;
+}
+.delete-confirm .cancel-btn.size6 {
+  width: 100px;
+  height: 34px;
+  line-height: 34px;
+  border-radius: 4px;
+}
+.delete-confirm .cancel-btn.green {
+  background: #1BB797;
+}
+.delete-confirm .cancel-btn.green:hover {
+  background: #13A688;
+}
+.delete-confirm .cancel-btn.grey {
+  background: #ddd;
+}
+.delete-confirm .cancel-btn.grey:hover {
+  background: #ccc;
+}
+.delete-confirm .cancel-btn.blue {
+  background: #34B0F3;
+}
+.delete-confirm .cancel-btn.blue:hover {
+  background: #23A2E7;
+}
+.delete-confirm .cancel-btn.red {
+  color: #fff;
+  background: #FF554F;
+}
+.delete-confirm .cancel-btn.red:hover {
+  color: #fff;
+  background: #F03A33;
+}
+.delete-confirm .cancel-btn.empty {
+  border: 1px dashed #ddd;
+  color: #bbb;
+  background: none;
+}
+.delete-confirm .cancel-btn.empty:hover {
+  border: 1px solid #1BB797;
+  background: #1BB797;
+  color: #fff;
+}
+.delete-confirm .cancel-btn:hover {
+  background: #ccc;
+}
+.com-dialog .el-dialog__header {
+  border-bottom: 1px solid #ddd;
+  padding: 0 30px;
+  height: 70px;
+  box-sizing: border-box;
+}
+.com-dialog .el-dialog__title {
+  color: #333333;
+  line-height: 70px;
+}
+.com-dialog .el-dialog__headerbtn {
+  top: 15px;
+  right: 20px;
+  line-height: 40px;
+}
+.com-dialog .el-dialog__headerbtn .el-dialog__close {
+  font-size: 24px;
+  color: #bbb;
+}
+.com-dialog .el-dialog__body {
+  padding: 30px;
+}
+.com-dialog .el-dialog__footer {
+  padding: 0 30px 40px 30px;
+  text-align: center;
+}
+.com-dialog .el-dialog__footer .btn + .btn {
+  margin-left: 20px;
+}
+.com-dialog .flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.com-dialog .flex-1 {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
