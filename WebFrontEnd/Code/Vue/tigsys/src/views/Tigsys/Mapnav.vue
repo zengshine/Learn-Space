@@ -50,12 +50,25 @@ export default class Detial extends Vue {
   }
   created() {
   }
+  activated () {
+    this.setLocation()
+  }
   mounted() {
+    this.setLocation()
+  }
+  setLocation(){
+    console.log("mapnav:setLocation")
+        let position=[this.selectedMerc.mchLocLng,this.selectedMerc.mchLocLat]
         this.map = new window.AMap.Map("mapCt", {
           resizeEnable: true,
-          center: [this.selectedMerc.mchLocLng,this.selectedMerc.mchLocLat],
-          zoom:14
-        });
+          center: position,
+          zoom:16
+      });
+    var marker = new window.AMap.Marker({
+        icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png",
+        position: position,
+      });
+    marker.setMap(this.map);
   }
   goBack(){
       this.$router.go(-1)

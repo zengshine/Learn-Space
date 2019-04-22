@@ -1,4 +1,4 @@
-import { ConfigState } from '../../types/index'
+import { ConfigState } from "@/plugins/store/types"
 export const state: ConfigState = {
     isShowHeader: true,
     isShowFooter: true,

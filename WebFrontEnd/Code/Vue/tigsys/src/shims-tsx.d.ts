@@ -19,5 +19,7 @@ declare global {
     bodymovin: any
     lottie: any
     AMap:any
+    CMBLS:any
+    cmblsExecutor:any
   }
 }

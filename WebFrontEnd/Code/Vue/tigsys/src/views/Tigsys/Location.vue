@@ -20,9 +20,9 @@
            <p class="tag-title m-t-30">当前</p>
            <div class="tagitem-ct flex-row">
              <div @click="setLocationByGps" class="tag-item tag-item-width m-t-20 flex flex-h-v-center">
-               <div>
+               <div class="p-h-20">
                  <svg class="svgIcon fs-28"><use xlink:href="#icondizhi1"/></svg>
-                 <span>{{"深圳"}}</span>
+                 <span>{{location.mchAdrCty}}</span>
                </div>
              </div>
              <div v-if="locationType=='history'" class="flex flex-h-v-center m-t-20 p-l-10 fs-24">
@@ -130,6 +130,7 @@ import service from "@/service"
 import DHeader from "@/views/Tigsys/DHeader.vue"
 import Indexlist from "@/components/IndexList/Indexlist.vue"
 import Indexsection from "@/components/IndexList/Indexsection.vue"
+import { ILocation } from '../../types';
 const configmodule=namespace('config')
 @Component({
   components: {
@@ -141,7 +142,7 @@ const configmodule=namespace('config')
 export default class Detial extends Vue {
   @Prop({default:false}) isShow!: boolean;
   @Prop({default:""}) locationType
-  @Model('change') location;
+  @Model('change') location!:ILocation;
   private originCities
   private citisList
   private searchText
@@ -178,6 +179,8 @@ export default class Detial extends Vue {
   setLocation(location){
     let tempLocation=Object.assign({},this.location)
     tempLocation.mchAdrCty=location.regionName
+    tempLocation.mchLocLng=0
+    tempLocation.mchLocLat=0
     this.$emit('change',tempLocation)
     this.close()
   }

@@ -1,5 +1,5 @@
 import axios from "@/plugins/axios";
-function getMercList(inputParams) {
+function getMercList(command,inputParams) {
     let params={
         "PRCCOD":"APPQUERYMCHLIST",
         "INFBDY":{
@@ -19,9 +19,10 @@ function getMercList(inputParams) {
             ]
         }
     }
+    params.PRCCOD=command
     params.INFBDY.inputParams[0]=inputParams
     return axios({
-        url:"/metapi/rmi.do",
+        url:"/ticketshelf/rmi.do",
         method: "Post",
         data: params,
       })
@@ -37,7 +38,7 @@ function getMercList(inputParams) {
     }    
     params.INFBDY.inputParams[0]=inputParams
     return axios({
-        url:"/metapi/rmi.do",
+        url:"/ticketshelf/rmi.do",
         method: "Post",
         data: params,
       })
@@ -57,7 +58,7 @@ function getMercList(inputParams) {
     }
     params.INFBDY.inputParams=inputParams
     return axios({
-        url:"/metapi/rmi.do",
+        url:"/ticketshelf/rmi.do",
         method: "Post",
         data: params,
     })    

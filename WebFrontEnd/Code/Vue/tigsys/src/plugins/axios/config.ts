@@ -13,7 +13,6 @@ export interface AxiosResponse<T = any> {
 }
 
 export function requestSuccessFunc(requestConfig: any) {
-
     // Do something before request is sent
     return requestConfig
 }

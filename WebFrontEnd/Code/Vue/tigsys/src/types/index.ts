@@ -23,6 +23,6 @@ export interface ILocation{
     mchAdrPvn:string,
     mchAdrCty:string,
     mchAdrReg:string,
-    mchLocLng:string,
-    mchLocLat:string,
+    mchLocLng:number,
+    mchLocLat:number,
   }

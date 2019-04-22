@@ -1,9 +1,9 @@
 <template>
       <div class="c-filter-ct">
       <div :class="{'filter-fixed':isFixedFilter}" :style="{top:headerHeight+'px'}" v-outsideClick:isFilterListVisible class="c-filter z-3 p-h-32 flex-row-nowrap flex-v-center flex-h-between h-84">
-      <div class="c-filter-item flex flex-v-center" :class="{'selected':isFilterListVisible&&selectedFilterType==type,'flex-h-center':index>0&&index<Object.keys(filterTypes).length-1,'flex-h-end':index==Object.keys(filterTypes).length-1}" @click="onFilterClick(type)"  v-for="(type,index) in Object.keys(filterTypes)" :key="index">
+      <div class="c-filter-item flex flex-v-center" :class="{'selected':isFilterListVisible&&selectedFilterType==type,'flex-h-center':index>0&&index<Object.keys(options).length-1,'flex-h-end':index==Object.keys(options).length-1}" @click="onFilterClick(type)"  v-for="(type,index) in Object.keys(options)" :key="index">
           <span class="filter-type-name text-ellipsis">
-            {{filterRes[type]}}
+            {{filterRes[type].name}}
           </span>
           <svg class="svgIcon fs-28 c-filter-caret" :class="{'rotate180 selected':isFilterListVisible&&selectedFilterType==type}">
             <use xlink:href="#iconxialajiantou1"></use>
@@ -13,7 +13,7 @@
     <transition name="slide-up">
     <div class="c-filterlist z-2" v-show="isFilterListVisible">
         <ul class="filterlist-ct">
-          <li v-for="(item,index) in filterItemList" @click="selectFilterItem(item)" :key="index" class="filterlist-item">{{item}}</li>
+          <li v-for="(item,index) in filterItemList" @click="selectFilterItem(item)" :key="index" class="filterlist-item" :class="{'selected':item.name==filterRes[selectedFilterType]}">{{item.name}}</li>
         </ul>
     </div>
     </transition> 
@@ -82,21 +82,20 @@ import { debug } from 'util';
 export default class Ticket extends Vue {
   @Prop({default:false}) isFixedFilter!: boolean;
   @Prop() headerHeight!: number;
+  @Prop({type:Object,default:{}}) options
   @Model('change',{type:Object,default:()=>{
     return {}
   }}) filterRes;
-  filterTypes:object={location:{name:"附近",type:""},category:{name:"全部类型",type:""},activity:{name:"全部活动",type:""}}
-  filterItems:object={
-    locationList:["全部范围","福田","福田","福田","福田","福田","福田"],
-    categoryList:["全部类型","食品保健","食品保健","食品保健","食品保健","食品保健","食品保健"],
-    activityList:["全部活动","免费一网通支付券","免费一网通支付券","免费一网通支付券","免费一网通支付券"]
-  };
+  // filterItems:object={
+  //   locationList:["全部范围","福田","福田","福田","福田","福田","福田"],
+  //   categoryList:["全部类型","食品保健","食品保健","食品保健","食品保健","食品保健","食品保健"],
+  //   activityList:["全部活动","免费一网通支付券","免费一网通支付券","免费一网通支付券","免费一网通支付券"]
+  // };
   filterItemList:Array<string>=[]
   selectedFilterType:string=""
   isFilterListVisible:boolean=false;
   data() {
     return {
-      curIndex:1
     };
   }
   created() {}
@@ -104,14 +103,14 @@ export default class Ticket extends Vue {
   onFilterClick(type){
     this.isFilterListVisible=true
     this.selectedFilterType=type
-    this.filterItemList=this.filterItems[`${type}List`]
+    this.filterItemList=this.options[type].data
     this.$emit('clickFilter')
   }
   selectFilterItem(filterItem){
-    let filterResTem=Object.assign({},this.filterRes)
-    filterResTem[this.selectedFilterType]=filterItem
-    this.$emit('change',filterResTem)
-    //this.isFilterListVisible=false
+    let filterResTemp=Object.assign({},this.filterRes)
+    filterResTemp.type=this.selectedFilterType
+    filterResTemp[this.selectedFilterType]=filterItem
+    this.$emit('change',filterResTemp)
   }
 }
 </script>

@@ -13,10 +13,19 @@ server.use(jsonServer.bodyParser);
 //    console.log(req)
 //    res.send(require('./data/mercList.json'))
 // })
-server.post('/metapi/rmi.do',(req,res)=>{
+server.post('/ticketshelf/rmi.do',(req,res)=>{
   let {body:{PRCCOD}}=req
   switch(PRCCOD){
     case 'APPQUERYMCHLIST':
+    res.send(require('./data/mercList.json'));
+    break;
+    case 'APPQUERYMCHLISTBYMCHTYP':
+    res.send(require('./data/mercList.json'));
+    break;
+    case 'APPQUERYMCHLISTBYBEFTYP':
+    res.send(require('./data/mercList.json'));
+    break;
+    case 'APPQUERYMCHLISTBYSEARCH':
     res.send(require('./data/mercList.json'));
     break;
     case 'APPQUERYMCHINF':

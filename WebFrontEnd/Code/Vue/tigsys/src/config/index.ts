@@ -10,11 +10,11 @@ export const MONITOR_ENABLE = true
 
 // API 默认配置
 export const API_DEFAULT_CONFIG = {
-    baseUrl: process.env.NODE_ENV !== 'production' ? "" : "http://metapi.paas.cmbchina.com/metapi/rmi.do",
+    baseUrl: process.env.NODE_ENV !== 'production' ? "" : "http://99.14.232.142:8080",
     mockBaseURL: '',
     mock: true,
     debug: false,
-    sep: '/'
+    sep: ''
 }
 
 // CONST 默认配置

@@ -2,7 +2,7 @@ module.exports = {
   baseUrl: process.env.NODE_ENV === "production" ? "/" : "/",
   devServer: {
     proxy: {
-      "/metapi": {
+      "/ticketshelf/rmi.do": {
         target: 'http://127.0.0.1:3000',
         changeOrigin: true,
         secure: false

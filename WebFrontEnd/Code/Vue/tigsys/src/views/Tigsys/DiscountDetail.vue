@@ -7,15 +7,15 @@
               <span class="dot"></span>
               <span class="title">活动详情</span>
           </div>
-          <div class="p-l-40 m-t-28 ">
+          <div class="flex flex-h-center">
+          <div>
           <div class="plan">活动时间：{{Info.actvStartDt}}~{{Info.actvEndDt}} </div>
           <div class="plan">参与方式：{{Info.befDesc}}</div>
+          </div>
           </div>
           <div class="regular-title m-t-55">具体规则：</div>
           <div class="regular m-t-15">
           <div>{{Info.dtlRule}} </div>
-          <div>2、数量有限，仅限500名；</div>
-          <div>3、如有疑问，请咨询招商银行，客服电话95555；</div>
           </div>
           <div class="close-btn" @click="closeModal"><svg class="c-header-arrow svgIcon"><use xlink:href="#iconguanbi3"/></svg></div>
           </div>          
@@ -120,7 +120,6 @@ export default class Ticket extends Vue {
       vm.$emit('close',false)
   }
   loadDetail(){
-      debugger
       service.getActivityDetail(this.params).then(res=>{
           this.Info=res[0]
       })

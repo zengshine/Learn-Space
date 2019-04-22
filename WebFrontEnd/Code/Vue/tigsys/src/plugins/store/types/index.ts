@@ -1,6 +1,6 @@
 import { Module } from 'vuex';
 
-export interface ConfigState {
+ interface ConfigState {
     isShowHeader: boolean,
     isShowFooter: boolean,
     isLoading:boolean,
@@ -9,7 +9,11 @@ export interface ConfigState {
     UserInfo: any
 }
 
-export interface RootState {
+ interface RootState {
     version: string,
     selectedMerc:any
+}
+export {
+    ConfigState,
+    RootState
 }

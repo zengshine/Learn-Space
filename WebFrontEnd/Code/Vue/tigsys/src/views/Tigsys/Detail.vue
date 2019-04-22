@@ -47,6 +47,7 @@
       </p>
     </div>
     <ImgSlider :slides=Info.mchImgList v-model=isShowImgSlider @change="isShowImgSlider=false"></ImgSlider>
+    <mt-actionsheet v-model="isActionSheetVisible" :actions=actionList></mt-actionsheet>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -165,6 +166,8 @@ export default class Detial extends Vue {
   private isShowDiscountDetail=false;
   private isShowImgSlider=false
   private Info:any
+  isActionSheetVisible:boolean=false
+  actionList:Array<any>=[{name:'拨打手机',method:this.doCallMerc,type:'mchCtcPhone'},{name:'拨打座机',method:this.doCallMerc,type:'mchCtcTel'}]
   @Action('setSelectedMerc') setSelectedMerc
   @Watch('id')
   onIdChanged(val,oldVal){
@@ -187,7 +190,12 @@ export default class Detial extends Vue {
     this.$emit('close',false)
   }
   callMerc(){
-    console.log(`${this.Info.Mch_Ctc_Phone}:${this.Info.Mch_Ctc_Tel}`)
+    this.isActionSheetVisible=true
+  }
+  doCallMerc(){
+    debugger
+    window.vbus.$emit("executeCmbInterface",`http://cmbiphone/call/${this.Info[arguments[0].type]}`)
+    console.log(`${this.Info.mchCtcPhone}:${this.Info.mchCtcTel}`)
   }
   getLocation(){
     this.setSelectedMerc(this.Info)
@@ -209,7 +217,6 @@ export default class Detial extends Vue {
   }
   getMercId(){
     let vm=this
-    debugger
     return vm.Info.Mch_Id
   }
 }

@@ -139,12 +139,11 @@ export default class Ticket extends Vue {
   mounted() {}
   openDetail(){
       let vm=this;
-      switch(this.Info.Bef_Typ){
-        case 'FMJ':
+      switch(this.Info.befTyp){
+        case 'SMJ':
         this.setDiscountDetailVisible(true);
         this.params.befBeanId=this.Info.befBeanId
         this.params.befTyp=this.Info.befTyp
-        debugger
         this.params.mchId=this.getMercId()     
         break;
         case 'SMG':
