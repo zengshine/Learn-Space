@@ -6,3 +6,5 @@ window.vbus = new Vue();
 class globalEvent extends Vue{
     
 }
+
+export default globalEvent
