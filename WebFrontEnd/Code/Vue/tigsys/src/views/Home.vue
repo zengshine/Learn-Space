@@ -283,7 +283,7 @@ export default class Home extends Vue {
   loadData(command="APPQUERYMCHLIST") {
     service.getMercList(command,this.targetParams).then((res: any) => {
       this.mercList.push(...res);
-    });
+    })
   }
   changeLocation(location: ILocation) {
     //获取定位信息
@@ -360,7 +360,10 @@ export default class Home extends Vue {
     this.isDetailModalVisible = isVisible;
   }
   locateByGps() {
-    window.vbus.$emit("executeCmbInterface", "http://CMBLS/gps?id=123");
+    //id：功能标识
+    //maptype：	地图类型： bd 表示使用百度地图定位，gd表示使用高德地图定位。默认值为bd
+    //usecache：是否使用缓存
+    window.vbus.$emit("executeCmbInterface", "http://cmbls/gps?id=15&usecache=false&maptype=gd");
   }
 }
 </script>

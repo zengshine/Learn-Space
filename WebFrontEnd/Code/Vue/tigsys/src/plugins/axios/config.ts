@@ -30,6 +30,7 @@ export function responseSuccessFunc(response: any) {
         return outputParams
         case "ERRMSG":
         let {ERRMSG}=data
+        window.vbus.$emit('global.message',{message:ERRMSG})
         return Promise.reject(ERRMSG)
         default: break;
     }
