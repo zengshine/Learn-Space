@@ -130,7 +130,7 @@ import service from "@/service"
 import DHeader from "@/views/Tigsys/DHeader.vue"
 import Indexlist from "@/components/IndexList/Indexlist.vue"
 import Indexsection from "@/components/IndexList/Indexsection.vue"
-import { ILocation } from '../../types';
+import { ILocation } from '../../types'
 const configmodule=namespace('config')
 @Component({
   components: {
@@ -185,7 +185,7 @@ export default class Detial extends Vue {
     this.close()
   }
   setLocationByGps(){
-    let tempLocation=Object.assign({},this.location)
+    this.setLocation(this.location)
   }
   reLocation(){
     this.$emit('reLocate')

@@ -61,6 +61,11 @@
       infinite-scroll-disabled="loading"
       infinite-scroll-distance="10"
     >
+          <!-- 测试代码 -->
+      <ul>
+        <li @click="locateByGps" class="p-32">定位测试a</li>
+        <li @click="makePhoneCall" class="p-32">电话拨打测试</li>
+      </ul>
       <ul>
         <Infocell
           :info="item"
@@ -228,22 +233,19 @@ export default class Home extends Vue {
   }
   created() {
     this.initFilter();
-    this.loadData("APPQUERYMCHLIST");
+    this.loadData();
   }
   mounted() {
     let vm = this;
     vm.dealWithScrollEle();
     vm.calEleHeight();
-    // window.vbus.$emit("global.loading");
-    // setTimeout(() => {
-    //   window.vbus.$emit("global.loaded");
-    // }, 1000);
     //获取位置信息
     this.locateByGps();
     //设置位置信息
     window.vbus.$on("global.location", (location: ILocation, locationType) => {
       this.locationType = locationType;
       this.changeLocation(location);
+      this.isSetLocation=false
     });
   }
   initFilter(){
@@ -281,9 +283,16 @@ export default class Home extends Vue {
       })
   }
   loadData(command="APPQUERYMCHLIST") {
+    let vm=this
     service.getMercList(command,this.targetParams).then((res: any) => {
-      this.mercList.push(...res);
+      vm.mercList=res
     })
+  }
+  loadMore() {
+    //后台接口未实现分页加载逻辑
+    // service.getMercList(this.targetParams).then((res: any) => {
+    //   this.mercList.push(...res);
+    // });
   }
   changeLocation(location: ILocation) {
     //获取定位信息
@@ -294,9 +303,9 @@ export default class Home extends Vue {
     this.setLocation(this.params.location);
   }
   setParamsLocation(location:ILocation){
-    this.targetParams.mchAdrPvn=location.mchAdrPvn
-    this.targetParams.mchAdrCty=location.mchAdrCty
-    this.targetParams.mchAdrReg=location.mchAdrReg
+    this.targetParams.mchAdrPvn=location.mchAdrPvn||"" //后台接口可能有bug,不能传undefined,必须传空字符串
+    this.targetParams.mchAdrCty=location.mchAdrCty||""
+    this.targetParams.mchAdrReg=location.mchAdrReg||""
     this.targetParams.mchLocLng=location.mchLocLng
     this.targetParams.mchLocLat=location.mchLocLat
   }
@@ -312,11 +321,6 @@ export default class Home extends Vue {
     //vm.$router.push({ path: "/detail" });
     this.detailItemId = item.mchId;
     this.toggDetailModal(true);
-  }
-  loadMore() {
-    // service.getMercList(this.targetParams).then((res: any) => {
-    //   this.mercList.push(...res);
-    // });
   }
   dealWithScrollEle() {
     let vm = this;
@@ -363,7 +367,11 @@ export default class Home extends Vue {
     //id：功能标识
     //maptype：	地图类型： bd 表示使用百度地图定位，gd表示使用高德地图定位。默认值为bd
     //usecache：是否使用缓存
-    window.vbus.$emit("executeCmbInterface", "http://cmbls/gps?id=15&usecache=false&maptype=gd");
+    window.vbus.$emit("executeCmbInterface", "http://cmbls/gps?id=123&usecache=false&maptype=gd");
+  }
+  makePhoneCall(){
+    //得判断userAgent
+    window.vbus.$emit("executeCmbInterface",`http://cmbandroid/call/1388088880`)
   }
 }
 </script>

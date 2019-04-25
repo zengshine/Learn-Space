@@ -56,7 +56,7 @@ function getMercList(command,inputParams) {
             ]
         }
     }
-    params.INFBDY.inputParams=inputParams
+    params.INFBDY.inputParams[0]=inputParams
     return axios({
         url:"/ticketshelf/rmi.do",
         method: "Post",

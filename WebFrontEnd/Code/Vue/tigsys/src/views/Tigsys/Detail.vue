@@ -193,7 +193,6 @@ export default class Detial extends Vue {
     this.isActionSheetVisible=true
   }
   doCallMerc(){
-    debugger
     window.vbus.$emit("executeCmbInterface",`http://cmbiphone/call/${this.Info[arguments[0].type]}`)
     console.log(`${this.Info.mchCtcPhone}:${this.Info.mchCtcTel}`)
   }

@@ -1,12 +1,12 @@
 <template>
   <div id="app">
+    <globalEvent></globalEvent>
     <!-- router-view -->
     <transition>
       <keep-alive exclude="mapnav">
         <router-view></router-view>
       </keep-alive>     
-    </transition>
-    <globalEvent></globalEvent>   
+    </transition>   
   </div>
 </template>
 

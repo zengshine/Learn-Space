@@ -32,7 +32,7 @@
         color: #ff5c3b;
     }
   }
-  &.SMJ{
+  &.FLJ{
       background-image: url("../../static/image/icons/bluet.svg");
       .name {
       background: #34B0F3;
@@ -48,7 +48,7 @@
       color:#34B0F3;
     }
   }
-    &.FLJ{
+    &.SMJ{
       background-image: url("../../static/image/icons/yellowt.svg");
       .name {
       background: #FFB148;
@@ -139,17 +139,14 @@ export default class Ticket extends Vue {
   mounted() {}
   openDetail(){
       let vm=this;
-      switch(this.Info.befTyp){
-        case 'SMJ':
+      let type=this.Info.befTyp
+      if(type==='FLJ'){
         this.setDiscountDetailVisible(true);
         this.params.befBeanId=this.Info.befBeanId
         this.params.befTyp=this.Info.befTyp
-        this.params.mchId=this.getMercId()     
-        break;
-        case 'SMG':
-        window.location=this.Info.Bef_Tkin_Url;
-        break;
-        default:break;
+        this.params.mchId=this.getMercId()   
+      }else if(['SMG','FMJ','SMJ'].indexOf(type)>-1){
+         window.location=this.Info.befTkinUrl;
       }
   }
   setDiscountDetailVisible(visible){

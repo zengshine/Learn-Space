@@ -1,6 +1,6 @@
 <template>
   <header class="fixed-top h-64 c-header z-3" :class="{'transparent':transparent}">
-    <div class="flex-row back">
+    <div class="flex-row-nowrap back">
         <slot name="left"></slot>
     </div>
     <div class="relative search m-l-32">

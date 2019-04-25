@@ -13,7 +13,7 @@
     <transition name="slide-up">
     <div class="c-filterlist z-2" v-show="isFilterListVisible">
         <ul class="filterlist-ct">
-          <li v-for="(item,index) in filterItemList" @click="selectFilterItem(item)" :key="index" class="filterlist-item" :class="{'selected':item.name==filterRes[selectedFilterType]}">{{item.name}}</li>
+          <li v-for="(item,index) in filterItemList" @click="selectFilterItem(item)" :key="index" class="filterlist-item" :class="{'selected':item.name==filterRes[selectedFilterType].name}">{{item.name}}</li>
         </ul>
     </div>
     </transition> 
@@ -86,11 +86,6 @@ export default class Ticket extends Vue {
   @Model('change',{type:Object,default:()=>{
     return {}
   }}) filterRes;
-  // filterItems:object={
-  //   locationList:["全部范围","福田","福田","福田","福田","福田","福田"],
-  //   categoryList:["全部类型","食品保健","食品保健","食品保健","食品保健","食品保健","食品保健"],
-  //   activityList:["全部活动","免费一网通支付券","免费一网通支付券","免费一网通支付券","免费一网通支付券"]
-  // };
   filterItemList:Array<string>=[]
   selectedFilterType:string=""
   isFilterListVisible:boolean=false;
@@ -99,7 +94,8 @@ export default class Ticket extends Vue {
     };
   }
   created() {}
-  mounted() {}
+  mounted() {
+  }
   onFilterClick(type){
     this.isFilterListVisible=true
     this.selectedFilterType=type

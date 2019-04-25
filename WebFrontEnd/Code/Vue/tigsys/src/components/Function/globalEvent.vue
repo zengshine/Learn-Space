@@ -11,14 +11,11 @@ const configModuleNS=namespace("config");
   }
 })
 export default class Detial extends Vue {
-  functional:boolean=true
+  abstract:boolean=true
   @configModuleNS.State('isLoading') isLoading;
   private vbus:any
+  private loadingRequestCount=0
   render(h) {}
-  data() {
-    return {
-    };
-  }
   created() {
       let vm=this
       window.vbus=new Vue()
@@ -26,11 +23,13 @@ export default class Detial extends Vue {
       window.vbus.$on('global.loading',(params={
       spinnerType: 'fading-circle'
       })=>{
+        vm.loadingRequestCount++
         Indicator.open(params)
         })
       //关闭加载框
       window.vbus.$on('global.loaded',()=>{
-        Indicator.close()
+        vm.loadingRequestCount>0&&vm.loadingRequestCount--
+        vm.loadingRequestCount==0&&Indicator.close()     
       })
       //提示框
       window.vbus.$on('global.message',(params)=>{
@@ -41,8 +40,6 @@ export default class Detial extends Vue {
       window.vbus.$on('executeCmbInterface',(command)=>{
         cmblsJSExecutor(command)
       }) 
-  }
-  mounted() {
   }
 }
 </script>

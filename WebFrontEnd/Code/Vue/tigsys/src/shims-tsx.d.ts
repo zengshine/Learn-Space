@@ -20,6 +20,7 @@ declare global {
     lottie: any
     AMap:any
     CMBLS:any
+    cmbls:any
     cmblsExecutor:any
   }
 }

@@ -74,6 +74,7 @@ font-size:32px;
 line-height:45px;
 }
 .regular{
+white-space: pre-line;
 font-size:30px;
 color:rgba(102,102,102,1);
 line-height:42px;
