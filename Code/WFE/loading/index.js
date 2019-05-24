@@ -40,7 +40,7 @@ window.addEventListener("load",function(){
             }
         }
     })
-    
+    //explain
     let app=new Vue({
         el:"#app",
         data(){
