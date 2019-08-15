@@ -1,7 +1,6 @@
 //routes
-import Home from '@/views/Home.vue'
+import Home from '@/views/Tigsys/Home.vue'
 const Detail =()=>import('@/views/Tigsys/Detail.vue')
-// import Detail from '@/views/Tigsys/Detail.vue'
 const Location =()=>import('@/views/Tigsys/Location.vue')
 const Mapnav =()=>import('@/views/Tigsys/Mapnav.vue')
 const routes = [

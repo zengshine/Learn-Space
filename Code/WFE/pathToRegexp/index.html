@@ -9,7 +9,8 @@
 </head>
 <body>
   <script>
-    pathToRegexp('/foo/:id');
+    const path = '/foo/:*';
+    console.log(pathToRegexp(path));
   </script>
 </body>
 </html>

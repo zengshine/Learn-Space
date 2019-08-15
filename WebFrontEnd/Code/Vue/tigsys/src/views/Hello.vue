@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { Component,Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 
@@ -16,18 +16,14 @@ import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
   }
 })
 export default class Home extends Vue {
-  data () {
-    return {
-     
-    }
+  data() {
+    return {};
   }
-  mounted() {
-  }
+  mounted() {}
 }
 </script>
 <style>
-.home{
+.home {
   height: 1000px;
 }
 </style>
-

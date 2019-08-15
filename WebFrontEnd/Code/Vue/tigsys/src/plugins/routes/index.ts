@@ -7,7 +7,8 @@ Vue.use(Router)
 
 //注入默认配置和路由表
 let routerInstance = new Router({
-    routes: Routes
+    routes: Routes,
+    base:'/tigsys'
 })
 
 //注入拦截器

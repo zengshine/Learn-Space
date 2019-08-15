@@ -1,0 +1,95 @@
+{
+  "DALCOD": null,
+  "ERRMSG": null,
+  "ISUDAT": null,
+  "ISUTIM": null,
+  "PRCCOD": "APPQUERYMCHINF",
+  "RTNCOD": "SUC0000",
+  "RTNLVL": null,
+  "TARSVR": null,
+  "WEBCOD": null,
+  "INFBDY": {
+    "outputParams": [
+      {
+        "mchCtcTel": "0571-111111111",
+        "mchLocLng": 119.997456,
+        "mchAdrBd": "星光大道",
+        "mchImgList": [
+          "/image/banner/detialBanner.jpeg",
+          "/image/banner/detialBanner.jpeg",
+          "/image/banner/detialBanner.jpeg",
+          "/image/banner/detialBanner.jpeg",
+          "/image/banner/detialBanner.jpeg"
+        ],
+        "mchAdr": "山东省烟台市海阳市滨盛路",
+        "fstImg": "/image/banner/detialBanner.jpeg",
+        "mchId": "MCH1115620857822187520",
+        "mchTxtDesc": "世界炸鸡第一品牌，始于1905年。世界炸鸡第一品牌，始于1905年。",
+        "mchCtcPhone": "13888888888",
+        "mchLocLat": 30.15131,
+        "tagList": ["炸鸡", "美式快餐"],
+        "mchNm": "喜来登B",
+        "befList": [
+          {
+            "befBeanId": "BEF1117688134272946176",
+            "befTyp": "SMJ",
+            "befTtlNbr": 1000,
+            "befStartDt": "2019-04-01",
+            "befEndDt": "2019-04-20",
+            "actvStartDt": "2019-04-01",
+            "actvEndDt": "2019-04-30",
+            "befNm": "5元券",
+            "befDesc": "满30元可用，全场通用",
+            "befTkinUrl": "http://cmbchina.com",
+            "befPrice": 0.01,
+            "befAmt": 5,
+            "befThdAmt": 39
+          },
+          {
+            "befBeanId": "BEF1117688175310016512",
+            "befTyp": "FMJ",
+            "befTtlNbr": 1000,
+            "befStartDt": "2019-04-01",
+            "befEndDt": "2019-04-20",
+            "actvStartDt": "2019-04-01",
+            "actvEndDt": "2019-04-30",
+            "befNm": "5元券",
+            "befDesc": "满30元可用，全场通用",
+            "befTkinUrl": "http://cmbchina.com",
+            "befAmt": 5,
+            "befThdAmt": 39
+          },
+          {
+            "befBeanId": "BEF1117688192255004672",
+            "befTyp": "FLJ",
+            "befTtlNbr": 1000,
+            "befStartDt": "2019-04-01",
+            "befEndDt": "2019-04-20",
+            "actvStartDt": "2019-04-01",
+            "actvEndDt": "2019-04-30",
+            "befNm": "5元券",
+            "befDesc": "满30元可用，全场通用",
+            "befAmt": 5,
+            "dtlMthd": "",
+            "dtlRule": ""
+          },
+          {
+            "befBeanId": "BEF1117688212119228416",
+            "befTyp": "STM",
+            "befTtlNbr": 1000,
+            "befStartDt": "2019-04-01",
+            "befEndDt": "2019-04-20",
+            "actvStartDt": "2019-04-01",
+            "actvEndDt": "2019-04-30",
+            "befNm": "5元券",
+            "befDesc": "满30元可用，全场通用",
+            "befTkinUrl": "http://cmbchina.com",
+            "befPrice": 0.01,
+            "vouAmt": 500
+          }
+        ],
+        "logoImg": "/image/banner/detialBanner.jpeg"
+      }
+    ]
+  }
+}
