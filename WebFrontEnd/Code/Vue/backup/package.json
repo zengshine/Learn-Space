@@ -45,7 +45,7 @@
     "postcss-viewport-units": "^0.1.6",
     "postcss-write-svg": "^3.0.1",
     "sass-loader": "^7.0.1",
-    "swiper": "^4.4.6",
+    "swiper": "^6.5.1",
     "typescript": "^3.0.0",
     "vue-template-compiler": "^2.5.17"
   }
