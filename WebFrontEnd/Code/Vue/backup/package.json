@@ -11,7 +11,7 @@
     "@fortawesome/fontawesome-free": "^5.5.0",
     "@types/swiper": "^4.4.1",
     "animate.css": "^3.7.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "chart.js": "^2.7.3",
     "echarts": "^4.2.0-rc.2",
     "lottie-web": "^5.4.2",
