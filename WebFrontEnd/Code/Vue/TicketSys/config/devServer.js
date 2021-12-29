@@ -21,7 +21,7 @@ export default {
     }
   },
   before(app){
-    app.get('http://metapi.paas.cmbchina.cn/metapi/rmi.do',(req,res,next)=>{
+    app.get('www.delete.com',(req,res,next)=>{
       res.json(mercList);
     })
   }
